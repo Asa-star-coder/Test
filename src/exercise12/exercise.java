@@ -6,7 +6,7 @@ public class exercise {
         // Skapa ett program som innehåller en array med fem namn
 
         //type[] varName = {value, value, value};
-                          //0           1          2        3       4
+        //0           1          2        3       4
         //String[] names ={"Amanda", "Beatrice", "Ceasar", "David", "Elin"};
         //Om vi vill lägga in all data från början så är det här ett smidigt sätt.
 
@@ -24,8 +24,19 @@ public class exercise {
         //arrayName[0]
         //arrayName[1]
 
-        System.out.println(names[0]);
-        System.out.println(names[4]);
+        for (int i = 0; i < names.length; i++) {
+            System.out.println(names[i]);
+            }
 
+        String myString = "hej på dig";
+
+        String[] stringArray = myString.split(" ");
+
+        for (int i = 0; i < stringArray.length; i++) {
+            System.out.println(stringArray[i]);
+
+
+        }
     }
+
 }
