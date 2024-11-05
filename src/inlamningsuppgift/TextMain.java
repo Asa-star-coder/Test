@@ -3,7 +3,7 @@ package inlamningsuppgift;
 //Import av scanner-klass vilket gör det möjligt att läsa användarinmatningar från kommandoraden
 import java.util.Scanner;
 
-//Public betyder att den här klassen kan nås från andra paket
+//Public betyder att den här klassen kan nås från andra paket och kunna användas av andra klasser.
 //TextMain använder TextInfo för att hålla koll på data medan användaren matar in text.
 public class TextMain
 {
@@ -26,55 +26,59 @@ public class TextMain
 
      */
 
-        //Skapar ett objekt av klassen TextInfo. Objektet används för att hålla koll på antal tecken och rader
+        //Skapar ett objekt av klassen TextInfo. Objektet (med initialvärdena 0 rader, 0 tecken, tom text)
+        // används för att hålla koll på antal tecken, rader som användaren matar in.
         TextInfo textobject = new TextInfo(0,0,"");
 
-        //Används för att kontrollera while-loopen. När number är 1 fortsätter loopen att köra.
+        //Den här variabeln styr while-loopen. När number är 1 fortsätter loopen att köra, när number blir 0 avslutas loopen.
         int number = 1;
-        //Används för att hålla reda på det total antalet tecken som har skrivits (förutom "Stopp")
+        //Används för att hålla reda på det total antalet tecken som användaren skrivit (exklusive "Stopp")
         int secondNumber= 0;
-        //Används för att räkna antalet rader som användaren skrivit
+        //Håller reda på antalet rader som användaren skrivit
         int secondRow = 0;
-        //Används för att lagra varje textrad som användaren skriver
+        //Används för att lagra varje textrad som användaren matar in
         String text = "";
 
-        //Loopen körs så länge number 1 är 1 tills användaren skriver "Stopp"
+        //Loopen körs så länge number 1 är lika med 1. När number blir 0 avslutas loopen
         while(number == 1)
         {
-            //Programmet ber användare att använda en text
+            //Programmet ber användare skriva en textrad
             System.out.println("Ange en text ");
-            //hämtar inmatningen från användaren genom att kalla på getText-metoden
+            //Skapar en ny Scanner-instans för att läsa användarinmatning från kommandoraden.
             Scanner scan = new Scanner(System.in);
+            //Läser in en hel rad från användaren och lagrar den i variabeln text.
             text = scan.nextLine();
 
 
-            //Om användaren skriver "Stopp" sätts number till 0 vilket avslutar loopen
+            //Kontrollerar om användaren skrev "Stopp". euals används för att jämföra innehålliet i text med "Stopp"
+            // (istället för == som bara jämgör referenser).
             if (text.equals("Stopp"))
             {
+                //Om användaren skriver "Stopp" sätts number till 0 vilket avslutar loopen.
                 number = 0;
 
             }
+            //Om användare inte skrev "Stopp" - uppdatera rader och tecken
             else
             {
+                //Uppdaterar text i textobject med användaren senaste inmatning
                 textobject.setText(text);
-                //text = textobject.getInputValue();
-                //getrows hämtar det nuvarande antalet rader från textInfo-objektet och ökar det med 1
+                //Hämtar antalet rader från textobject, ökar det med 1 och sparar det i secondRow.
                 secondRow = textobject.getRows() + 1;
-                //Sätter det uppdaterade antalen rader i textobject
+                //Uppdaterar rows i textobject med det nya antalet rader
                 textobject.setRows(secondRow);
-
-                //Hämtar det aktuella antalet tecken från textobject och lägger till antal tecken i den nyinmatade raden text.length
+                //Betyder att värdet på characterNumber i objektet textobject hämtas och sparas i variabeln secondNumber.
                 secondNumber = textobject.getCharacterNumber();
-                //Uppdaterar det totala antalet tecken i textobject med det nya värdet
+                //Uppdaterar characterNumber i textobject med det nya totala antalet tecken.
                 textobject.setCharacterNumber(secondNumber);
 
                 //Den här delen av koden uppdaterar textobject med det aktuellt antal rader och tecken efter varje ny inmatning
             }
 
         }
-        //Skriver ut det totala antalet rader som användaren skrivit (exklusive "Stopp")
+        //Skriver ut det totala antalet rader som användaren skrivit (exklusive raden "Stopp")
         System.out.println("Antal rader: " + textobject.getRows());
-        //Skriver ut det totala antalet tecken som användaren skrivit (exklusive "Stopp")
+        //Skriver ut det totala antalet tecken som användaren skrivit (exklusive raden "Stopp")
         System.out.println("Antal tecken: " + textobject.getCharacterNumber());
 
     }
